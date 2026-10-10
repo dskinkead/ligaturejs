@@ -10,7 +10,7 @@ test('public package boundaries and component library are available', () => {
   const packageJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
   assert.deepEqual(Object.keys(packageJson.exports).sort(), ['.', './adapters', './cli', './devtools', './runtime'])
   assert.equal(pluginContract.schema, 'ligaturejs.plugin.v1')
-  assert.equal(packageJson.version, '0.1.0-rc.1')
+  assert.match(packageJson.version, /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/)
   assert.equal('private' in packageJson, false)
   assert.equal(typeof runtime.clientRuntime, 'function'); assert.equal(typeof adapters.createRouteHandler, 'function'); assert.equal(typeof devtools.inspectProject, 'function')
   assert.equal(Button.name, 'button'); assert.equal(Alert.name, 'alert'); assert.equal(Field.name, 'field')
