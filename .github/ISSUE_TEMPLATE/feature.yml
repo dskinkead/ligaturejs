@@ -1,0 +1,10 @@
+name: Feature request
+description: Propose a bounded, server-first improvement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and target boundary
+      description: Explain the user problem and why it belongs in Ligature.
+    validations:
+      required: true

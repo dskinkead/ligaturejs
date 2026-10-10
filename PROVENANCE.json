@@ -1,0 +1,8 @@
+{
+  "schema": "ligaturejs.provenance.v1",
+  "package": "ligaturejs",
+  "version": "0.1.0-rc.1",
+  "sourceDigest": "fc75fdec214763c912cdd169706b59afe36ca4067132ad3e97edfe80e436f49f",
+  "reproducible": true,
+  "generatedBy": "scripts/provenance.js"
+}

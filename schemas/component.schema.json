@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ligaturejs/component.v1",
+  "type": "object",
+  "required": ["name", "render"],
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "version": { "type": "string" },
+    "props": { "type": "object", "additionalProperties": { "$ref": "#/$defs/prop" } },
+    "events": { "type": "object", "additionalProperties": { "type": "string" } },
+    "styles": { "oneOf": [{ "type": "string" }, { "$ref": "#/$defs/style" }] },
+    "css": { "oneOf": [{ "type": "string" }, { "$ref": "#/$defs/style" }] },
+    "slots": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "slotFallbacks": { "type": "object" },
+    "children": { "type": "object" },
+    "render": { "type": "string" },
+    "mount": { "type": "string" },
+    "enhance": { "type": "string" },
+    "update": { "type": "string" },
+    "unmount": { "type": "string" },
+    "client": { "oneOf": [{ "type": "string" }, { "type": "object" }] }
+  },
+  "$defs": {
+    "prop": { "type": "object", "properties": { "type": { "enum": ["string", "number", "boolean", "object", "array", "null"] }, "required": { "type": "boolean" }, "default": {}, "coerce": { "type": "boolean" } }, "additionalProperties": false },
+    "style": { "type": "object", "required": ["css"], "properties": { "css": { "type": "string" }, "scope": { "enum": ["component", "global"] }, "layer": { "type": "string" }, "order": { "type": "integer" }, "source": { "type": "string" } }, "additionalProperties": false }
+  }
+}

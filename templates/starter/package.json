@@ -1,0 +1,7 @@
+{
+  "name": "my-ligature-app",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "ligature start", "dev": "ligature dev", "test": "ligature test", "check": "ligature check" },
+  "dependencies": { "ligaturejs": "^0.1.0" }
+}

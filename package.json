@@ -1,0 +1,105 @@
+{
+  "name": "ligaturejs",
+  "version": "0.1.0-rc.1",
+  "description": "Ligature — agent-oriented server-first components for Express",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "bin": {
+    "ligature": "./src/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./runtime": {
+      "types": "./runtime.d.ts",
+      "import": "./src/runtime.js"
+    },
+    "./adapters": {
+      "types": "./adapters.d.ts",
+      "import": "./src/adapters.js"
+    },
+    "./devtools": {
+      "types": "./devtools.d.ts",
+      "import": "./src/devtools.js"
+    },
+    "./cli": {
+      "types": "./cli.d.ts",
+      "import": "./src/cli.js"
+    }
+  },
+  "files": [
+    "src",
+    "schemas",
+    "docs/ACCESSIBILITY.md",
+    "docs/AGENT-GUIDE.md",
+    "docs/API-EXPORTS.md",
+    "docs/API.md",
+    "docs/APP-CONTRACT.md",
+    "docs/ARCHITECTURE.md",
+    "docs/CLIENT-RUNTIME.md",
+    "docs/COMPATIBILITY.md",
+    "docs/COMPONENT-TEMPLATE.md",
+    "docs/DATA.md",
+    "docs/decisions",
+    "docs/DISTRIBUTION.md",
+    "docs/EXAMPLE-PORTAL.md",
+    "docs/EXAMPLES.md",
+    "docs/FEATURE-STATUS.md",
+    "docs/HOW-TO-LIGATURE.md",
+    "docs/NAME.md",
+    "docs/OPERATIONS.md",
+    "docs/PACKAGING.md",
+    "docs/PRODUCTION.md",
+    "docs/PROGRESSIVE-RENDERING.md",
+    "docs/PUBLIC-PUBLISH-PLAN.md",
+    "docs/QUICKSTART.md",
+    "docs/REACT-COMPARISON.md",
+    "docs/REDESIGN.md",
+    "docs/RELEASE.md",
+    "docs/ROADMAP.md",
+    "docs/SECURITY.md",
+    "docs/STYLING.md",
+    "docs/SUPPORT.md",
+    "docs/SUPPORTED-TARGET.md",
+    "docs/TESTING.md",
+    "docs/TROUBLESHOOTING.md",
+    "docs/TYPESCRIPT.md",
+    "dist",
+    "templates",
+    "*.d.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "PROVENANCE.json"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "test:browser": "node --test test/browser-harness.test.js test/navigation.integration.test.js",
+    "test:playwright": "node --test test/playwright.test.js test/playwright.example.test.js test/browser-compatibility.test.js",
+    "test:visual": "node --test test/visual-regression.test.js",
+    "update:visual": "node scripts/update-visual-fixtures.js --update",
+    "test:a11y": "node --test test/a11y.test.js",
+    "build:runtime": "node scripts/runtime-bundle.js",
+    "check:runtime": "node scripts/runtime-bundle.js --check",
+    "check:schemas": "node scripts/schema-check.js",
+    "check:dependencies": "node scripts/dependency-check.js",
+    "check:licenses": "node scripts/license-check.js",
+    "check:performance": "node scripts/performance-check.js",
+    "check:consumer": "node scripts/package-consumer-check.js",
+    "check:docs": "node scripts/documentation-check.js",
+    "check:packaging": "node scripts/packaging-check.js",
+    "build:provenance": "node scripts/provenance.js --write",
+    "release:check": "node src/cli.js check && npm test && npm run test:playwright && npm run test:visual && npm run check:runtime && npm run check:schemas && npm run check:dependencies && npm run check:licenses && npm run check:performance && npm run check:consumer && npm run check:docs && npm run check:packaging && node scripts/provenance.js --check && node scripts/package-check.js",
+    "start": "node example/server.js",
+    "effort:study": "node scripts/effort-study.js",
+    "dev": "node src/cli.js dev ."
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "@axe-core/playwright": "^4.11.0"
+  }
+}

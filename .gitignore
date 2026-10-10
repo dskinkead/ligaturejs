@@ -1,0 +1,21 @@
+# Dependencies and generated local output
+node_modules/
+coverage/
+*.tgz
+
+# Local configuration and data
+.env
+.env.*
+*.db
+*.sqlite
+*.sqlite3
+
+# Editor/OS files
+.DS_Store
+*.swp
+
+# Development snapshots and benchmark artifacts
+*.orig
+*.bak
+docs/EFFORT-STUDY.*
+docs/BENCHMARK.md

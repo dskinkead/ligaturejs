@@ -1,0 +1,13 @@
+# Development-only material is never part of the public package.
+*.orig
+*.bak
+*.db
+*.sqlite
+*.sqlite3
+.env*
+docs/EFFORT-STUDY.*
+test/
+scripts/
+skill/
+example/
+.github/

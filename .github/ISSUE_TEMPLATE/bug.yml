@@ -1,0 +1,16 @@
+name: Bug report
+description: Report a reproducible Ligature problem
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the smallest public reproduction and expected behavior.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Ligature version
+    validations:
+      required: true

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ligaturejs/bolt.v1",
+  "title": "Ligature Bolt",
+  "description": "A reusable, explicitly registered server-rendered fragment.",
+  "type": "object",
+  "required": ["name", "version", "props", "mode"],
+  "properties": {
+    "name": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "version": { "type": "string", "minLength": 1 },
+    "props": { "type": "object", "additionalProperties": true },
+    "mode": { "enum": ["render", "template"] },
+    "hasTemplate": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}
