@@ -1,6 +1,10 @@
 # Ligature
 
-An agent-oriented, server-first component system for Express applications, designed to make UI work predictable for both humans and AI agents.
+An agent-oriented, server-first component system for Express applications. Its
+goal is to help AI agents make correct, reviewable changes with less human
+steering while keeping the resulting applications efficient at runtime. That
+advantage is a hypothesis to validate, not a claim based on framework features
+alone; see [AI-assisted development and performance](docs/AI-EFFICIENCY.md).
 
 ## CLI
 
@@ -26,6 +30,7 @@ portal; the portal is not modified by this project.
 - Lifecycle hooks suitable for AJAX navigation
 - Machine-readable discovery for agents
 - Small runtime with ordinary HTML and JavaScript output
+- Measurable agent task efficiency without sacrificing runtime performance
 
 The supported target is documented in [docs/SUPPORTED-TARGET.md](docs/SUPPORTED-TARGET.md):
 server-first, progressively enhanced, HTML-oriented applications.
