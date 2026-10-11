@@ -12,6 +12,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
+      - run: npx playwright install --with-deps chromium
       - run: npm test
       - run: npm run test:browser
       - run: npm run check:dependencies
@@ -27,5 +28,5 @@ jobs:
         with:
           node-version: 22.x
       - run: npm install
-      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: npx playwright install --with-deps chromium ${{ matrix.browser }}
       - run: npm run test:playwright
