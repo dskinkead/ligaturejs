@@ -4,8 +4,11 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [20.x, 22.x]
-    runs-on: ubuntu-latest
+        node-version: [22.x, 24.x]
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+      options: --user 1001 --ipc=host
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -16,16 +19,3 @@ jobs:
       - run: npm run test:browser
       - run: npm run check:dependencies
       - run: npm audit --audit-level=high
-  browser:
-    strategy:
-      matrix:
-        browser: [chromium, firefox, webkit]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-      - run: npm install
-      - run: npx playwright install --with-deps ${{ matrix.browser }}
-      - run: npm run test:playwright

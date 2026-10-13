@@ -28,13 +28,24 @@ Each component has one file and one explicit `defineComponent` contract:
 
 ## Implementation workflow
 
-1. Read the component manifest.
-2. Create or modify one component at a time.
-3. Define props and events before implementation.
-4. Keep server rendering deterministic and escaped.
-5. Add a fixture and lifecycle test.
-6. Run `npm test` before presenting the change.
-7. Report changed files, behavior, tests, and rollback steps.
+1. Read the task-relevant app manifest and contracts; inspect only the related
+   route, repository, component, or page before expanding scope.
+2. Use the CLI scaffold and existing local conventions for new work.
+3. Define inputs, outputs, validation, and errors before implementation.
+4. Keep server rendering deterministic and escaped; keep browser behavior
+   optional and scoped to the component that owns it.
+5. Add or update focused behavior coverage and run the narrowest relevant
+   checks, then the broader suite required by the change.
+6. Check performance budgets when rendering, runtime, assets, or generated
+   output may change. Do not trade user-visible performance for agent
+   convenience without evidence.
+7. Report changed files, behavior, checks and their outcomes, performance or
+   migration impact, and any remaining uncertainty.
+
+The product goal and evidence standard are in
+[`AI-EFFICIENCY.md`](AI-EFFICIENCY.md). Do not claim an agent-efficiency win
+from code shape alone; compare equivalent tasks and record directly observed
+outcomes.
 
 ## Completion checklist
 

@@ -25,7 +25,7 @@ receives data; it does not execute SQL.
 
 ## 2. Prerequisites
 
-- Node.js 20 or newer is recommended.
+- Node.js 22.13.0 or newer is required.
 - npm
 - A terminal
 - Chromium is needed for Playwright browser tests.

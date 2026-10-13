@@ -243,8 +243,8 @@ export const frameworkSupport: Readonly<{
   schema: 'ligaturejs.support.v1';
   server: Readonly<{
     runtime: 'Node.js';
-    minimum: '20.0.0';
-    supportedMajors: readonly ('20.x'|'22.x')[];
+    minimum: '22.13.0';
+    supportedMajors: readonly ('22.x'|'24.x')[];
     operatingSystems: readonly string[];
   }>;
   browser: Readonly<{
@@ -257,7 +257,7 @@ export const frameworkSupport: Readonly<{
     operatingSystems: readonly string[];
   }>;
   verification: Readonly<{
-    nodeCi: readonly ('20.x'|'22.x')[];
+    nodeCi: readonly ('22.x'|'24.x')[];
     browserCi: 'Chromium via Playwright';
   }>;
 }>

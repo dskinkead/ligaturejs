@@ -42,9 +42,18 @@
 
 ## Future ecosystem work
 
-1. Publish the prepared versioned package when explicitly authorized and
+The next product milestone is validation, not more framework surface area:
+
+1. Define repeatable, representative agent tasks and an equivalent baseline;
+   report task success, defects, human corrections, interaction overhead, and
+   app performance with methodology and limitations. See
+   [AI-EFFICIENCY.md](AI-EFFICIENCY.md).
+2. Use the evaluation to identify where contracts, scaffolds, diagnostics,
+   examples, or the supported target cause wasted agent effort.
+3. Build a reference application around those tasks and publish results before
+   making comparative AI-efficiency claims.
+4. Consider broader adapters or browser capabilities only when evidence from
+   real applications supports the investment and existing performance budgets
+   remain intact.
+5. Publish the prepared versioned package when explicitly authorized and
    maintain the registry/release policy.
-2. Build a larger reference application.
-3. Benchmark agent task completion against React/Vue baselines.
-4. Add framework-level database driver packages.
-5. Expand component-level reconciliation and hydration.

@@ -4,7 +4,7 @@
   "description": "Ligature — agent-oriented server-first components for Express",
   "type": "module",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.13.0"
   },
   "bin": {
     "ligature": "./src/cli.js"
@@ -36,6 +36,7 @@
     "schemas",
     "docs/ACCESSIBILITY.md",
     "docs/AGENT-GUIDE.md",
+    "docs/AI-EFFICIENCY.md",
     "docs/API-EXPORTS.md",
     "docs/API.md",
     "docs/APP-CONTRACT.md",

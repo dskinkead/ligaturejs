@@ -6,9 +6,9 @@ the package entrypoint.
 
 ## Server runtime
 
-- Node.js 20.x and 22.x are supported.
-- Node.js **20.0.0** is the minimum version (`package.json` declares
-  `engines.node >=20.0.0`).
+- Node.js 22.x and 24.x are supported.
+- Node.js **22.13.0** is the minimum version (`package.json` declares
+  `engines.node >=22.13.0`).
 - Supported server operating systems are Linux (x64/arm64), macOS 12 or
   newer (x64/arm64), and Windows 10 or newer (x64), subject to Node.js
   support for the selected release.
