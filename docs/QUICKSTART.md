@@ -1,7 +1,7 @@
 # Ligature in five minutes
 
 This is the shortest path from an empty directory to useful server-rendered
-HTML. It assumes Node.js 20 or newer.
+HTML. It requires Node.js 22.13.0 or newer.
 
 ## 1. Create and run an application
 

@@ -17,8 +17,8 @@ export const frameworkSupport = Object.freeze({
   schema: 'ligaturejs.support.v1',
   server: Object.freeze({
     runtime: 'Node.js',
-    minimum: '20.0.0',
-    supportedMajors: Object.freeze(['20.x', '22.x']),
+    minimum: '22.13.0',
+    supportedMajors: Object.freeze(['22.x', '24.x']),
     operatingSystems: Object.freeze([
       'Linux (x64/arm64)',
       'macOS 12+ (x64/arm64)',
@@ -40,7 +40,7 @@ export const frameworkSupport = Object.freeze({
     ])
   }),
   verification: Object.freeze({
-    nodeCi: Object.freeze(['20.x', '22.x']),
+    nodeCi: Object.freeze(['22.x', '24.x']),
     browserCi: 'Chromium via Playwright'
   })
 })
