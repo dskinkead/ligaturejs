@@ -51,16 +51,18 @@ listed in `docs/SUPPORT.md` is continuously tested.
 
 The example application has reviewed Chromium screenshots for the home page and
 the long-form guide in `test/fixtures/visual/`. They use a fixed 1280×720
-viewport, device scale factor 1, and a local Chromium binary. Run the focused
-check with:
+viewport, device scale factor 1, and Chromium 1.63.0 on Ubuntu 24.04. Generate
+or review fixture changes in the same Playwright container used by CI, because
+font rasterization and PNG output vary across operating systems:
 
 ```sh
 npm run test:visual
 ```
 
 When an intentional visual change is reviewed, regenerate both fixtures with
-`npm run update:visual`, then inspect the resulting PNGs in the change. The
-update command is deliberately explicit so an ordinary test run cannot rewrite
+`npm run update:visual` in the pinned `mcr.microsoft.com/playwright:v1.63.0-noble`
+container used by CI, then inspect the resulting PNGs in the change. The update
+command is deliberately explicit so an ordinary test run cannot rewrite
 reviewed artifacts. These fixtures are Chromium-specific; cross-browser
 behavior remains covered by the browser compatibility suite.
 ## Quality and release gates
