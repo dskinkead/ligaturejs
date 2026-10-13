@@ -11,8 +11,8 @@ frameworkRelease.schema // 'ligaturejs.release.v1'
 ## Semantic versioning
 
 Ligature uses [Semantic Versioning 2.0.0](https://semver.org/) for package
-versions. The package is currently a `0.1.0-rc.1` release candidate, so
-the pre-1.0 rules apply:
+versions. This source tree prepares `0.1.0-rc.2`; publication runs separately
+through the release workflow. The pre-1.0 rules apply:
 
 - `0.y.z` breaking API or machine-readable contract changes increment `y`.
 - `0.y.z` compatible features also increment `y`.

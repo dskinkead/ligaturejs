@@ -18,8 +18,9 @@ node src/cli.js check
 
 ## Status
 
-Release candidate `0.1.0-rc.1`. The project is separate from the SearchMonster
-portal; the portal is not modified by this project.
+This source tree prepares release candidate `0.1.0-rc.2`; publication runs
+separately through the release workflow. The project is separate from the
+SearchMonster portal; the portal is not modified by this project.
 
 ## Design goals
 
@@ -92,9 +93,8 @@ See [`docs/AGENT-GUIDE.md`](docs/AGENT-GUIDE.md) for the agent contract.
 For a complete beginner-to-production walkthrough, see
 [`docs/HOW-TO-LIGATURE.md`](docs/HOW-TO-LIGATURE.md).
 
-Before publishing publicly, follow the exhaustive
-[`docs/PUBLIC-PUBLISH-PLAN.md`](docs/PUBLIC-PUBLISH-PLAN.md). The package is
-prepared for publication but is not published by this release-candidate task.
+For publication status and the release checklist, see the exhaustive
+[`docs/PUBLIC-PUBLISH-PLAN.md`](docs/PUBLIC-PUBLISH-PLAN.md).
 
 Applications should also follow the four-layer contract in [`docs/APP-CONTRACT.md`](docs/APP-CONTRACT.md).
 
