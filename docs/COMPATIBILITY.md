@@ -1,8 +1,8 @@
 # Compatibility and deprecation policy
 
 This policy describes the compatibility promise for Ligature's documented
-framework surface. It applies to the private release candidate as a published
-design contract; it does not authorize publication of the package.
+framework surface. It applies to the published release candidate as a design
+contract; publication decisions are handled by the release process.
 
 The machine-readable summary is exported as `frameworkCompatibility`:
 
