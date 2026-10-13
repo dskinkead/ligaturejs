@@ -7,9 +7,17 @@ records the source tree digest in `PROVENANCE.json`.
 
 ## [Unreleased]
 
+No unreleased changes.
+
+## [0.1.0-rc.2] - 2026-10-13
+
 - Added explicit runtime, adapter, devtools, and CLI package subpaths.
 - Added versioned plugin contracts, starter templates, and the Button, Alert,
   and Field component library.
+- Set the minimum supported Node.js version to 22.13.0 to match the SQLite
+  example server.
+- Documented the AI-agent efficiency focus and pinned visual CI to a reproducible
+  Playwright environment.
 
 ## [0.1.0-rc.1] - 2026-10-10
 

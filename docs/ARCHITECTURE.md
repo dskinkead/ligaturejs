@@ -16,7 +16,7 @@ not silently become the source of truth for server data.
 
 The public package exports the framework contract from `src/index.js`. The
 server renderer, browser runtime, Express adapter, data helpers, CLI, schemas,
-and declarations are versioned together in this private release candidate.
+and declarations are versioned together in this public release candidate.
 Application code should import public exports, not internal `src/*` modules.
 
 ## Decision records

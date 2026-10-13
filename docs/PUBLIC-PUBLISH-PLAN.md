@@ -1,7 +1,9 @@
 # Ligature public publication plan
 
-Status: private release candidate. No public repository, package, or external
-announcement should be created until the owner explicitly approves publication.
+Status: `ligaturejs@0.1.0-rc.1` is already published publicly. This checklist
+tracks remaining initial-launch and per-release checks; the next source-tree
+candidate is `0.1.0-rc.2`. Do not publish or announce a new version without the
+owner's explicit approval.
 
 ## 1. Product and naming decisions
 
@@ -94,7 +96,7 @@ documents under `docs/`.
 Before publishing:
 
 - Set package name to `ligaturejs`.
-- Set a deliberate version; this release candidate is `0.1.0-rc.1`.
+- Set a deliberate version; the next release candidate is `0.1.0-rc.2`.
 - Set a clear description and keywords.
 - Set repository, homepage, bugs, and funding fields if applicable.
 - Set the correct `license` field.
@@ -164,8 +166,8 @@ Use least-privilege tokens. Do not expose npm or GitHub credentials in logs.
 4. Add issue templates.
 5. Add pull-request template.
 6. Add labels and a security contact.
-7. Create a version tag only after all gates pass; this candidate would use
-   `v0.1.0-rc.1`.
+7. Create a version tag only after all gates pass; the next candidate uses
+   `v0.1.0-rc.2`.
 8. Create GitHub release notes with:
    - What Ligature is.
    - Supported scope.
