@@ -97,6 +97,10 @@ snapshots and directly observed runs are available. No comparative result
 exists until both implementations have been completed and reviewed under this
 protocol.
 
+The first pre-registered task, acceptance rubric, and explicit study blockers
+are in [`AI-STUDY-PLAN.md`](AI-STUDY-PLAN.md). It is a study plan only; no
+paired runs or comparative conclusion exist yet.
+
 ## Decision rule
 
 Prioritize work that measurably reduces agent mistakes or steering, shortens a
