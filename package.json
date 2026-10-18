@@ -78,7 +78,7 @@
     "PROVENANCE.json"
   ],
   "scripts": {
-    "test": "node --test",
+    "test": "node --test --test-concurrency=1",
     "test:server": "node scripts/test-server.js",
     "test:browser": "node --test test/browser-harness.test.js test/navigation.integration.test.js",
     "test:playwright": "node --test test/playwright.test.js test/playwright.example.test.js test/browser-compatibility.test.js",
