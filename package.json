@@ -79,9 +79,10 @@
   ],
   "scripts": {
     "test": "node --test",
+    "test:server": "node scripts/test-server.js",
     "test:browser": "node --test test/browser-harness.test.js test/navigation.integration.test.js",
     "test:playwright": "node --test test/playwright.test.js test/playwright.example.test.js test/browser-compatibility.test.js",
-    "test:visual": "node --test test/visual-regression.test.js",
+    "test:visual": "node scripts/update-visual-fixtures.js",
     "update:visual": "node scripts/update-visual-fixtures.js --update",
     "test:a11y": "node --test test/a11y.test.js",
     "build:runtime": "node scripts/runtime-bundle.js",

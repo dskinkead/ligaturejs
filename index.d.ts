@@ -257,7 +257,7 @@ export const frameworkSupport: Readonly<{
     operatingSystems: readonly string[];
   }>;
   verification: Readonly<{
-    nodeCi: readonly ('22.x'|'24.x')[];
+    nodeCi: readonly ('22.13.0'|'22.x'|'24.x')[];
     browserCi: 'Chromium via Playwright';
   }>;
 }>

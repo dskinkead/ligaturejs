@@ -1,4 +1,6 @@
 import test from 'node:test'
+import os from 'node:os'
+import path from 'node:path'
 import assert from 'node:assert/strict'
 import { csrfToken, verifyCsrf, sessionContract, createSessionManager, securityHeaders, createAuthorization, validateUpload, isolatedUploadPath, createRateLimiter, createMemoryDatabase, withTransaction } from '../src/index.js'
 test('CSRF tokens are session-bound', () => { const session = {}; const token = csrfToken(session); assert.equal(verifyCsrf(session, token), true); assert.equal(verifyCsrf(session, 'wrong'), false) })
@@ -18,7 +20,10 @@ test('security headers and authorization enforce explicit policy', async () => {
 test('uploads are bounded and isolated', () => {
   assert.deepEqual(validateUpload({ name: 'avatar.png', type: 'image/png', size: 12 }, { mimeTypes: ['image/png'], extensions: ['.png'] }), { name: 'avatar.png', type: 'image/png', size: 12, extension: '.png' })
   assert.throws(() => validateUpload({ name: '../secret', type: 'text/plain', size: 1 }), /unsafe/)
-  assert.match(isolatedUploadPath('/tmp/uploads', 'avatar.png'), /^\/tmp\/uploads\/[a-f0-9]{32}-avatar\.png$/)
+  const root = path.join(os.tmpdir(), 'uploads')
+  const upload = isolatedUploadPath(root, 'avatar.png')
+  assert.equal(path.dirname(upload), root)
+  assert.match(path.basename(upload), /^[a-f0-9]{32}-avatar\.png$/)
 })
 test('rate limiter returns 429 after the bounded window quota', () => {
   const limiter = createRateLimiter({ max: 1, windowMs: 1000 }); const statuses = []; const res = { set: () => {}, status: code => ({ json: () => statuses.push(code) }) }

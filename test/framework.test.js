@@ -29,7 +29,7 @@ test("framework support contract defines runtime, browser, and OS baselines", ()
       minimumVersions: { chromium: "109", firefox: "115", safari: "16.4" },
       operatingSystems: ["Windows 10+", "macOS 12+", "iOS 16.4+", "Android 12+"]
     },
-    verification: { nodeCi: ["22.x", "24.x"], browserCi: "Chromium via Playwright" }
+    verification: { nodeCi: ["22.13.0", "22.x", "24.x"], browserCi: "Chromium via Playwright" }
   })
   assert.equal(Object.isFrozen(frameworkSupport), true)
   assert.equal(Object.isFrozen(frameworkSupport.server), true)
@@ -45,9 +45,9 @@ test("support docs, package engines, and CI matrix agree with the support contra
   assert.match(documentation, /^## Server runtime$/m)
   assert.match(documentation, /Node\.js 22\.x and 24\.x/)
   assert.match(documentation, /Chromium 109\+, Firefox 115\+, and Safari 16\.4\+/)
-  assert.match(documentation, /not a promise of cross-browser CI coverage/)
+  assert.match(documentation, /does not\s+test every supported browser\/OS combination/)
   assert.equal(packageManifest.engines.node, ">=22.13.0")
-  assert.match(workflow, /node-version: \[22\.x, 24\.x\]/)
+  assert.match(workflow, /node-version: \['22\.13\.0', 22\.x, 24\.x\]/)
 })
 
 test("supported-target docs state the React boundary and explicit non-targets", () => {

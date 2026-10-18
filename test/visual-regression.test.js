@@ -9,6 +9,10 @@ const root = process.cwd()
 const fixtures = path.join(root, 'test', 'fixtures', 'visual')
 
 test('example pages match their reviewed Chromium visual fixtures', async (t) => {
+  if (process.env.LIGATURE_TEST_VISUAL !== '1') {
+    t.skip('Run npm run test:visual for the isolated visual fixture check')
+    return
+  }
   let playwright
   try { playwright = await import('playwright') } catch { t.skip('Install playwright to run visual regression coverage'); return }
   const port = await freePort()

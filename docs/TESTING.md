@@ -25,6 +25,23 @@ with:
 node --test test/rendering.test.js
 ```
 
+## Cross-platform server checks
+
+`npm run test:server` runs every top-level `test/*.test.js` file except the six
+real-browser/visual suites listed in `scripts/test-server.js`. It includes the
+CLI install/generated-app tests, SQLite example HTTP workflow, and simulated
+browser/navigation contracts without requiring browser binaries. New server
+test files are included automatically; new real-browser suites must be added
+to the exclusion list.
+
+Push/pull-request CI runs this suite on Ubuntu 24.04, macOS 14, and Windows
+Server 2022 with Node 22.13.0, 22.x, and 24.x (nine combinations). The existing
+Linux Playwright-container matrix still runs the full `npm test` suite;
+`npm test` and the release gate have not been narrowed. Hosted runner coverage
+does not prove every minimum OS version or architecture in the support policy.
+`.gitattributes` keeps text checkouts LF-normalized so byte-for-byte runtime
+bundle and snapshot checks do not depend on Windows Git newline conversion.
+
 ## Browser compatibility checks
 
 The Playwright suite includes `test/browser-compatibility.test.js`, a shared
@@ -59,6 +76,10 @@ font rasterization and PNG output vary across operating systems:
 npm run test:visual
 ```
 
+The visual fixture check runs separately from `npm test`; this keeps Chromium's
+full-page screenshots out of the Node test worker while preserving an explicit
+visual gate in CI and `npm run release:check`.
+
 When an intentional visual change is reviewed, regenerate both fixtures with
 `npm run update:visual` in the pinned `mcr.microsoft.com/playwright:v1.63.0-noble`
 container used by CI, then inspect the resulting PNGs in the change. The update
@@ -80,8 +101,9 @@ The focused quality gates are:
   export. This catches missing shipped files and broken package boundaries.
 - `npm run test:a11y` runs axe against the example application; keyboard and
   semantic contracts are covered by `test/accessibility.test.js`.
-- `npm run test:playwright` is run for Chromium, Firefox, and WebKit in CI.
-  Local runs skip engines whose Playwright binaries are not installed.
+- Push/pull-request CI runs the Chromium browser checks; the release workflow's
+  `release:check` also runs `npm run test:playwright` for Chromium, Firefox, and
+  WebKit. Local runs skip engines whose Playwright binaries are not installed.
 
 `npm run release:check` includes these gates as well as the complete unit,
 browser, visual, runtime, schema, dependency, and package checks.

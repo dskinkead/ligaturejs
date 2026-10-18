@@ -40,20 +40,31 @@
 - Express middleware, security adapters, CSRF, sessions, transactions, and migrations
 - Browser, Playwright, accessibility, contract, and release checks
 
-## Future ecosystem work
+## 1.0.0 readiness
 
-The next product milestone is validation, not more framework surface area:
+The 1.0.0 milestone is a dependable, clearly scoped product, not a feature-count
+target. Validate the supported product before expanding framework surface:
 
-1. Define repeatable, representative agent tasks and an equivalent baseline;
-   report task success, defects, human corrections, interaction overhead, and
-   app performance with methodology and limitations. See
-   [AI-EFFICIENCY.md](AI-EFFICIENCY.md).
-2. Use the evaluation to identify where contracts, scaffolds, diagnostics,
-   examples, or the supported target cause wasted agent effort.
-3. Build a reference application around those tasks and publish results before
-   making comparative AI-efficiency claims.
-4. Consider broader adapters or browser capabilities only when evidence from
-   real applications supports the investment and existing performance budgets
-   remain intact.
-5. Publish the prepared versioned package when explicitly authorized and
-   maintain the registry/release policy.
+1. **Set the compatibility boundary.** Review every public export, schema,
+   rendered marker, and feature-status entry. Keep experimental capabilities
+   explicitly outside the stable promise; document any required migration.
+2. **Validate the supported application path.** Complete a representative
+   server-first application using the documented component, route, form,
+   session, authorization, migration, readiness, and shutdown guidance. Fix
+   friction or correctness gaps found in that path rather than adding APIs
+   speculatively.
+3. **Prove support claims.** Verify the declared Node and browser baselines with
+   the available automated coverage, or narrow the stated support promise to
+   what is actually verified.
+4. **Evaluate product outcomes.** For representative tasks, compare equivalent
+   implementations using task success, defects, human corrections, interaction
+   overhead, and resulting application behavior and performance. Report the
+   method, sample size, and limitations; do not claim an advantage unsupported
+   by the evidence. See [AI-EFFICIENCY.md](AI-EFFICIENCY.md).
+5. **Close the release gate.** Ensure the release checks, package contents,
+   changelog, compatibility notes, and upgrade guidance match the final stable
+   surface. Keep publication separate under the release policy.
+
+Broader adapters or browser capabilities are follow-on work only when real
+application evidence supports them and existing performance budgets remain
+intact.

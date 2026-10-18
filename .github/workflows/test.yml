@@ -1,10 +1,24 @@
 name: test
 on: [push, pull_request]
 jobs:
+  server:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-14, windows-2022]
+        node-version: ['22.13.0', 22.x, 24.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run test:server
   test:
     strategy:
       matrix:
-        node-version: [22.x, 24.x]
+        node-version: ['22.13.0', 22.x, 24.x]
     runs-on: ubuntu-24.04
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
@@ -14,8 +28,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
+      - run: npm ci
       - run: npm test
       - run: npm run test:browser
+      - run: npm run test:visual
       - run: npm run check:dependencies
       - run: npm audit --audit-level=high

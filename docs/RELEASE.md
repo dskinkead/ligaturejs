@@ -46,9 +46,26 @@ package version alone is not enough for a consumer to safely interpret data.
 This policy describes project maintenance expectations; publication remains a
 separate, explicitly authorized operation.
 
-## Release checklist
+## Framework package release gate
 
-Before packaging an application:
+Before preparing a framework package release, run `npm run release:check` from
+a clean checkout. This is the authoritative gate; it includes the project
+contract check, full Node test suite, browser and visual checks, runtime and
+schema consistency, dependency/license/performance checks, consumer install,
+documentation and packaging checks, provenance verification, and the final
+package artifact check. The gate must pass on the declared Node baseline in CI;
+browser engines unavailable locally are covered by the configured CI matrix,
+not treated as locally verified.
+
+Also review the target version against the SemVer policy above, ensure
+`CHANGELOG.md` describes user-visible changes and migrations, and regenerate
+and verify `PROVENANCE.json`. Packaging and this gate do not publish the
+package, create a tag, or authorize an announcement; those remain separate
+release operations.
+
+## Application packaging checklist
+
+Before packaging an application built with Ligature:
 
 1. Run `npm test`.
 2. Run browser and accessibility tests.

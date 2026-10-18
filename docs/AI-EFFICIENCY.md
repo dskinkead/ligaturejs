@@ -15,13 +15,12 @@ also meet the same user-visible behavior and performance requirements.
 Optimize both sides of the work:
 
 - **Development efficiency:** task success, correctness, human correction
-  count, agent/tool turns, and elapsed time or token use when the harness can
-  measure them reliably.
+  count, agent/tool turns, and elapsed time.
 - **Application efficiency:** server-render latency, client runtime and asset
   size, unnecessary browser work, and useful HTML available before enhancement.
 
-Do not infer agent time, tokens, or correction effort from final source files.
-Record unavailable measurements as unavailable.
+Do not infer agent time or correction effort from final source files. Record
+unavailable measurements as unavailable.
 
 ## Design implications
 
@@ -59,8 +58,48 @@ Before claiming a distinct agent advantage:
 
 The existing `npm run check:performance` enforces framework-level budgets;
 it is not a substitute for measuring representative end-to-end applications.
-The current effort-study script is an implementation-size and verification
-helper, not a controlled agent-comparison result.
+The effort-study command summarizes paired, independently reviewed runs from a
+JSON record. It does not run agents, infer human effort, or claim a framework
+advantage. Record runs from clean snapshots with identical task prompts, model,
+tooling, and turn budgets; use the same functional checks and review rubric for
+both implementations. Keep each run's commit, outcome, defect count, elapsed
+time, agent/tool turns, human prompts, corrections, and each run's clean start
+commit traceable to direct observation. Use `null` when a measurement was not
+captured.
+
+The former helper counted source files and invoked checks in a hard-coded local
+React checkout. Those numbers did not measure agent effectiveness and the
+checkout was not portable. The current command accepts explicit study records:
+
+```sh
+npm run effort:study -- /path/to/study.json --out /path/to/report.json
+```
+
+The record has `schemaVersion: 1`, a `task` (`id`, exact `prompt`, and
+`acceptanceCriteria`), `controls` (`model`, `tooling`, `turnBudget`), and a
+`runs` array. Each run records a clean-snapshot `startCommit`, a `pairId`,
+`implementation` (`ligature` or `baseline`),
+`reviewOutcome` (`pass`, `partial`, `fail`, or `null`), and directly observed
+values—or `null`—for `elapsedSeconds`, `agentToolTurns`, `humanPrompts`,
+`humanCorrections`, and `defects`. Reviewed runs also include
+`functionalChecks: { "passed": n, "total": n }` and each run records
+`runtimeMetrics: { "serverRenderMs": n, "clientRuntimeGzipBytes": n,
+"usefulHtmlBytes": n }`, using `null` for unavailable metrics. Pair IDs identify
+runs started from equivalent snapshots for the same task. The JSON report
+preserves missing measurement counts and reports paired median differences for
+development effort and runtime metrics; it is descriptive and does not decide
+statistical significance or authorize a marketing claim.
+
+The old helper's priority-field task is already implemented in the current
+Ligature example, so it is not an unfinished task on the current snapshot. It
+could only serve as a historical comparison if equivalent clean pre-feature
+snapshots and directly observed runs are available. No comparative result
+exists until both implementations have been completed and reviewed under this
+protocol.
+
+The first pre-registered task, acceptance rubric, and explicit study blockers
+are in [`AI-STUDY-PLAN.md`](AI-STUDY-PLAN.md). It is a study plan only; no
+paired runs or comparative conclusion exist yet.
 
 ## Decision rule
 

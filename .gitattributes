@@ -1,0 +1,3 @@
+# Keep generated bundles and text snapshots byte-stable on every CI runner.
+* text=auto eol=lf
+*.png binary

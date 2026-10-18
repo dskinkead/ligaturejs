@@ -314,10 +314,10 @@ tests, and a verified example where applicable.
   tests cover byte budgets and font crossorigin output, with usage guidance in
   `docs/STYLING.md`.
 - [x] Add visual regression fixtures for the example app. Reviewed Chromium
-  screenshots cover the home page and guide page; `test/visual-regression.test.js`
-  detects byte-level drift at a fixed viewport, `npm run update:visual` is the
-  explicit regeneration path, and `npm run release:check` includes the focused
-  check. See [docs/TESTING.md](TESTING.md).
+  screenshots cover the home page and guide page; `npm run test:visual` detects
+  byte-level drift at a fixed viewport, `npm run update:visual` is the explicit
+  regeneration path, and `npm run release:check` includes the focused check.
+  See [docs/TESTING.md](TESTING.md).
 
 ## 7. Routing and application shell
 

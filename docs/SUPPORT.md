@@ -13,8 +13,14 @@ the package entrypoint.
   newer (x64/arm64), and Windows 10 or newer (x64), subject to Node.js
   support for the selected release.
 
-The CI workflow runs the Node test suite on both supported major lines. A
-future Node.js major is not supported until it is added to this matrix and
+The CI workflow runs the Node test suite on the declared minimum (22.13.0), the
+current 22.x line, and 24.x on Ubuntu 24.04, macOS 14, and Windows Server 2022
+GitHub-hosted runners (`npm run test:server`). Real-browser and visual tests
+remain in the pinned Ubuntu Playwright container. This samples each supported
+server OS family; it does not independently verify every listed minimum OS
+version or CPU architecture. A configured matrix is not evidence of a passing
+run: release readiness requires green CI results for all nine server jobs.
+A future Node.js major is not supported until it is added to this matrix and
 verified.
 
 ## Browser runtime
@@ -34,10 +40,12 @@ standard `fetch`, `DOMParser`, `MutationObserver`, `history`, and element
 replacement APIs; applications remain responsible for any APIs they use in
 their own components.
 
-The repository automated browser verification currently runs Chromium via
-Playwright. That is verification coverage, not a promise of cross-browser CI coverage. Browser support is limited to the listed evergreen baselines and
-does not include Internet Explorer or embedded webviews with independently
-lagging engines.
+Push and pull-request CI runs Chromium browser checks. The release gate also
+runs an engine smoke contract in Chromium, Firefox, and WebKit; this does not
+test every supported browser/OS combination or prove the listed minimum engine
+versions individually. The browser compatibility checks and their limits are
+described in [Testing](TESTING.md). Support does not include Internet Explorer
+or embedded webviews with independently lagging engines.
 
 ## Compatibility scope
 
