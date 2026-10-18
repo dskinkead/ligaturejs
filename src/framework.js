@@ -40,7 +40,7 @@ export const frameworkSupport = Object.freeze({
     ])
   }),
   verification: Object.freeze({
-    nodeCi: Object.freeze(['22.x', '24.x']),
+    nodeCi: Object.freeze(['22.13.0', '22.x', '24.x']),
     browserCi: 'Chromium via Playwright'
   })
 })

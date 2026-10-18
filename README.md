@@ -31,7 +31,8 @@ SearchMonster portal; the portal is not modified by this project.
 - Lifecycle hooks suitable for AJAX navigation
 - Machine-readable discovery for agents
 - Small runtime with ordinary HTML and JavaScript output
-- Measurable agent task efficiency without sacrificing runtime performance
+- Correct, reviewable agent changes with less human steering, without
+  sacrificing application runtime performance
 
 The supported target is documented in [docs/SUPPORTED-TARGET.md](docs/SUPPORTED-TARGET.md):
 server-first, progressively enhanced, HTML-oriented applications.

@@ -5,6 +5,11 @@ import os from 'node:os'
 import path from 'node:path'
 import { execFileSync } from 'node:child_process'
 
+// npm.cmd cannot be executed directly by execFileSync on Windows.
+const npmCli = process.env.npm_execpath ?? (process.platform === 'win32' ? path.join(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js') : null)
+const npmCommand = npmCli ? process.execPath : 'npm'
+const npmArgs = npmCli ? [npmCli] : []
+
 test('CLI scaffolds an app and component', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ligaturejs-'))
   execFileSync(process.execPath, ['src/cli.js', 'create', 'app', 'demo-app', dir], { cwd: process.cwd() })
@@ -29,14 +34,14 @@ test('generated app installs and runs its generated tests', () => {
   run(['create', 'repository', 'profiles'])
   run(['create', 'migration', '001_profiles'])
 
-  execFileSync('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund'], {
+  execFileSync(npmCommand, [...npmArgs, 'install', '--ignore-scripts', '--no-audit', '--no-fund'], {
     cwd: dir,
     stdio: 'ignore'
   })
   const runner = path.join(dir, 'run-generated-tests.cjs')
   fs.writeFileSync(runner, `
     const { execFileSync } = require('node:child_process')
-    execFileSync('npm', ['test'], { stdio: 'inherit' })
+    execFileSync(${JSON.stringify(npmCommand)}, [...${JSON.stringify(npmArgs)}, 'test'], { stdio: 'inherit' })
   `)
   execFileSync(process.execPath, [runner], { cwd: dir, stdio: 'inherit' })
 })

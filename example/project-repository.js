@@ -13,7 +13,7 @@ export function createProjectRepository(databasePath = ':memory:') {
     removeProject(id) { return db.prepare('DELETE FROM projects WHERE id = ?').run(Number(id)).changes > 0 },
     tasks(projectId) { return db.prepare('SELECT id, project_id, title, done, priority FROM tasks WHERE project_id = ? ORDER BY id').all(Number(projectId)).map(task => ({ ...task, done: Boolean(task.done) })) },
     createTask(projectId, input) { const result = db.prepare('INSERT INTO tasks (project_id, title, priority) VALUES (?, ?, ?)').run(Number(projectId), input.title.trim(), input.priority); return db.prepare('SELECT id, project_id, title, done, priority FROM tasks WHERE id = ?').get(Number(result.lastInsertRowid)) },
-    updateTask(id, input) { const result = db.prepare('UPDATE tasks SET title = ?, done = ? WHERE id = ?').run(input.title.trim(), input.done ? 1 : 0, Number(id)); return result.changes ? db.prepare('SELECT id, project_id, title, done FROM tasks WHERE id = ?').get(Number(id)) : null },
+    updateTask(id, input) { const result = db.prepare('UPDATE tasks SET title = COALESCE(?, title), done = COALESCE(?, done) WHERE id = ?').run(input.title === undefined ? null : input.title.trim(), input.done === undefined ? null : (input.done ? 1 : 0), Number(id)); return result.changes ? db.prepare('SELECT id, project_id, title, done FROM tasks WHERE id = ?').get(Number(id)) : null },
     removeTask(id) { return db.prepare('DELETE FROM tasks WHERE id = ?').run(Number(id)).changes > 0 },
     close() { db.close() }
   }

@@ -7,7 +7,15 @@ records the source tree digest in `PROVENANCE.json`.
 
 ## [Unreleased]
 
-No unreleased changes.
+- Add a nine-job server CI matrix across Linux, macOS, and Windows; keep
+  real-browser/visual coverage in Linux and remove POSIX-only test assumptions.
+
+- Preserve project and task create/toggle/delete workflows as native POST form
+  submissions when browser enhancement is unavailable, while retaining JSON
+  enhancement and correcting partial task updates.
+- Align the machine-readable Node support baseline with CI and support guidance.
+- Refresh reviewed example-page visual fixtures and clarify the package
+  release gate separately from application packaging.
 
 ## [0.1.0-rc.2] - 2026-10-13
 

@@ -13,6 +13,10 @@ http.createServer((req,res)=>{
   res.setHeader('X-Request-Id', req.headers['x-request-id'] || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`)
   if (url.pathname === '/__agent_tags/application.json') { res.setHeader('content-type', 'application/json'); return res.end(JSON.stringify(applicationManifest)) }
   if (url.pathname === '/how-to' && req.method === 'GET') return sendHowTo(res)
+  if (url.pathname === '/' && req.method === 'POST') return readForm(req, body => {
+    if (!body.name?.trim()) return sendText(res, 400, 'Project name is required')
+    try { repository.createProject(body); return redirect(res, '/') } catch { return sendText(res, 409, 'Project name already exists') }
+  })
   if (url.pathname === '/api/projects' && req.method === 'GET') return sendJson(res, 200, { data: repository.projects() })
   if (url.pathname === '/api/projects' && req.method === 'POST') return readJson(req, body => { if (!body?.name?.trim()) return sendJson(res, 400, { error: 'project name required' }); try { sendJson(res, 201, repository.createProject(body)) } catch { sendJson(res, 409, { error: 'project name already exists' }) } })
   const projectApi = url.pathname.match(/^\/api\/projects\/(\d+)$/)
@@ -25,7 +29,20 @@ http.createServer((req,res)=>{
   const taskApiId = url.pathname.match(/^\/api\/tasks\/(\d+)$/)
   if (taskApiId && req.method === 'PATCH') return readJson(req, body => { const task = repository.updateTask(taskApiId[1], body || {}); task ? sendJson(res, 200, task) : sendJson(res, 404, { error: 'not found' }) })
   if (taskApiId && req.method === 'DELETE') return repository.removeTask(taskApiId[1]) ? res.writeHead(204).end() : sendJson(res, 404, { error: 'not found' })
+  const taskFormAction = url.pathname.match(/^\/tasks\/(\d+)\/(toggle|delete)$/)
+  if (taskFormAction && req.method === 'POST') return readForm(req, body => {
+    if (taskFormAction[2] === 'delete') return repository.removeTask(taskFormAction[1]) ? redirect(res, '/') : sendText(res, 404, 'Task not found')
+    if (!['true', 'false'].includes(body.done)) return sendText(res, 400, 'Invalid task update')
+    const task = repository.updateTask(taskFormAction[1], { done: body.done === 'true' })
+    return task ? redirect(res, `/projects/${task.project_id}`) : sendText(res, 404, 'Task not found')
+  })
   const projectPage = url.pathname.match(/^\/projects\/(\d+)$/)
+  const projectTasksPage = url.pathname.match(/^\/projects\/(\d+)\/tasks$/)
+  if (projectTasksPage && req.method === 'POST') return readForm(req, body => {
+    if (!body.title?.trim()) return sendText(res, 400, 'Task title is required')
+    if (!['low', 'medium', 'high'].includes(body.priority)) return sendText(res, 400, 'Priority must be low, medium, or high')
+    try { repository.createTask(projectTasksPage[1], body); return redirect(res, `/projects/${projectTasksPage[1]}`) } catch { return sendText(res, 404, 'Project not found') }
+  })
   if (projectPage && req.method === 'GET') { const project = repository.project(projectPage[1]); if (!project) return sendJson(res, 404, { error: 'not found' }); const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(project.name)}</title><script src="/__agent_tags/runtime.js"></script></head><body><nav><a href="/">Projects</a></nav><main data-agent-outlet><h1>${escapeHtml(project.name)}</h1>${registry.render('task-board',{project,tasks:repository.tasks(project.id)},{id:`project-${project.id}`,data:{projectId:project.id}})}</main><script src="/__agent_tags/components/task-board.js"></script><script src="/example-bootstrap.js"></script></body></html>`; res.setHeader('content-type','text/html'); return res.end(html) }
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ligature Projects</title><script src="/__agent_tags/runtime.js"></script></head><body><nav aria-label="Primary"><a href="/">Projects</a><a href="/how-to">How to use Ligature</a><a href="/__agent_tags/application.json">Manifest</a></nav><main data-agent-outlet><h1>Projects</h1>${registry.render('project-list',{projects:repository.projects()},{id:'projects'})}</main><script src="/__agent_tags/components/project-list.js"></script><script src="/example-bootstrap.js"></script></body></html>`
   const next = () => {
@@ -58,7 +75,10 @@ http.createServer((req,res)=>{
 process.on('SIGTERM', () => { repository.close(); process.exit(0) })
 
 function readJson(req, callback) { let raw=''; req.on('data', chunk => { raw += chunk }); req.on('end', () => { try { callback(JSON.parse(raw || '{}')) } catch { callback({}) } }) }
+function readForm(req, callback) { let raw=''; req.on('data', chunk => { raw += chunk }); req.on('end', () => callback(Object.fromEntries(new URLSearchParams(raw)))) }
 function sendJson(res, status, value) { res.statusCode=status; res.setHeader('content-type','application/json'); res.end(JSON.stringify(value)) }
+function sendText(res, status, value) { res.statusCode=status; res.setHeader('content-type','text/plain; charset=utf-8'); res.end(value) }
+function redirect(res, location) { res.writeHead(303, { location }); res.end() }
 
 function sendHowTo(res) {
   const sections = [

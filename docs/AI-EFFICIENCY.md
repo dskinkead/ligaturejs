@@ -15,13 +15,12 @@ also meet the same user-visible behavior and performance requirements.
 Optimize both sides of the work:
 
 - **Development efficiency:** task success, correctness, human correction
-  count, agent/tool turns, and elapsed time or token use when the harness can
-  measure them reliably.
+  count, agent/tool turns, and elapsed time.
 - **Application efficiency:** server-render latency, client runtime and asset
   size, unnecessary browser work, and useful HTML available before enhancement.
 
-Do not infer agent time, tokens, or correction effort from final source files.
-Record unavailable measurements as unavailable.
+Do not infer agent time or correction effort from final source files. Record
+unavailable measurements as unavailable.
 
 ## Design implications
 
