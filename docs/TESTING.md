@@ -76,6 +76,10 @@ font rasterization and PNG output vary across operating systems:
 npm run test:visual
 ```
 
+The visual fixture check runs separately from `npm test`; this keeps Chromium's
+full-page screenshots out of the Node test worker while preserving an explicit
+visual gate in CI and `npm run release:check`.
+
 When an intentional visual change is reviewed, regenerate both fixtures with
 `npm run update:visual` in the pinned `mcr.microsoft.com/playwright:v1.63.0-noble`
 container used by CI, then inspect the resulting PNGs in the change. The update
